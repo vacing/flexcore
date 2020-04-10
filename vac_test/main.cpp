@@ -6,12 +6,28 @@ using namespace fc;
 
 std::string var;
 
-int main()
+void state_test()
 {
-    pure::state_source<std::string> src{[] { return var; }};
+    pure::state_source<std::string> src{[] { return "src1"; }};
+    pure::state_source<std::string> src2{[] { return "src2"; }};
     pure::state_sink<std::string> sink;
     src >> sink;
-    var = "Hello world!";
-    assert(sink.get() == var);
-    std::cout << sink.get() << std::endl;
+    std::cout << "state_test: " << sink.get() << std::endl;
+}
+
+void event_test()
+{
+    pure::event_source<int> src;
+    pure::event_sink<int> sink{[](int v) { 
+        std::cout << "event_test: "
+                  << v << std::endl;
+    }};
+    src >> sink;
+    src.fire(42);
+}
+
+int main()
+{
+    state_test();
+    event_test();
 }
