@@ -1,3 +1,5 @@
+
+
 /.settings
 /.project
 /.cproject
@@ -7,3 +9,13 @@ build*/
 build-*/
 CMakeLists.txt.user
 
+
+# 忽略*.o和*.a文件
+*.[oa]
+
+# ctags
+tags
+
+# vim
+.*.swp
+.*.swo
